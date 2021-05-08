@@ -1,7 +1,5 @@
 const express = require('express');
-// const session = require('express-session');
 const mongoose = require('mongoose');
-const passport = require('passport');
 const dotenv = require('dotenv');
 const upload = require('./helpers/imageUpload');
 
@@ -24,26 +22,12 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use(session({
-//   resave: true,
-//   saveUninitialized: true,
-//   secret: 'SECRET',
-//   cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
-//   store: new MongoStore({
-//     url: uri,
-//     autoReconnect: true,
-//   })
-// }));
-app.use(passport.initialize());
-app.use(passport.session());
-
 // Routes
 app.get('/health', health.health);
-app.post('/image', upload.array('images'), image.upload);
+app.post('/image', [authentication, upload.array('images')], image.upload);
 app.post('/user/register', user.register);
 app.post('/user/login', user.login);
 
