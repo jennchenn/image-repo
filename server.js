@@ -3,13 +3,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const dotenv = require('dotenv');
-const multer = require('multer');
 const upload = require('./helpers/imageUpload');
 
 dotenv.config({ path: '.env' });
 
 const health = require('./routes/health/health.routes');
 const image = require('./routes/image/image.routes');
+const user = require('./routes/user/user.routes');
+
+const authentication = require('./middleware/authentication');
+
 const app = express();
 
 mongoose.set('useNewUrlParser', true);
@@ -40,6 +43,8 @@ app.use(passport.session());
 // Routes
 app.get('/health', health.health);
 app.post('/image', upload.single('image'), image.upload);
+app.post('/user/register', user.register);
+app.post('/user/login', user.login);
 
 // Start server
 const PORT = process.env.PORT || 8080;
