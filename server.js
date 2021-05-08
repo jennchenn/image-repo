@@ -3,15 +3,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const dotenv = require('dotenv');
+const multer = require('multer');
+const upload = require('./helpers/imageUpload');
 
 dotenv.config({ path: '.env' });
 
 const health = require('./routes/health/health.routes');
+const image = require('./routes/image/image.routes');
 const app = express();
-
-const uri =
-  'mongodb+srv://admin:super@image-repo.idlxj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
@@ -38,8 +37,9 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+// Routes
 app.get('/health', health.health);
+app.post('/image', upload.single('image'), image.upload);
 
 // Start server
 const PORT = process.env.PORT || 8080;
