@@ -28,6 +28,8 @@ app.use(express.json());
 // Routes
 app.get('/health', health.health);
 app.post('/image', [authentication, upload.array('images')], image.upload);
+app.get('/image', authentication, image.searchByName);
+app.get('/image/user', authentication, image.retrieveAllByUser);
 app.post('/user/register', user.register);
 app.post('/user/login', user.login);
 

@@ -7,7 +7,8 @@ const imageSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
-    description: String
+    description: String,
+    isPublic: Boolean
 }, { timestamps: true });
 
 const Image = mongoose.model('Image', imageSchema);
