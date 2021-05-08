@@ -8,11 +8,12 @@ const storage = multer.diskStorage({
         cb(null, file.originalname);
     }
 });
+
 const upload = multer({
     storage: storage,
     fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
-            return cb(new Error('Please upload an image with .png or .jpg extension'));
+            return cb(new Error('Please upload an image with .png, .jpg or .jpeg extension'));
         }
         cb(undefined, true);
     }
