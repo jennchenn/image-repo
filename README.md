@@ -29,6 +29,7 @@ $ npm run start
 ## Features
 - Add images to repository (single or multiple file upload)
 - Search by image title
+- Register a user
 - Basic authentication using JWT
 - Basic testing of routes
 

@@ -16,7 +16,6 @@ const app = express();
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
-console.log(process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', (err) => {
   console.log(`Error connecting to MongoDB: ${err}`);

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const app = require('../server');
+const app = require('../src/server');
 const supertest = require('supertest');
 
 afterAll(async () => {

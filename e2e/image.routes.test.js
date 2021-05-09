@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const path = require('path');
-const app = require('../server');
+const app = require('../src/server');
 const supertest = require('supertest');
-const User = require('../models/User');
-const Image = require('../models/Image');
+const User = require('../src/models/User');
+const Image = require('../src/models/Image');
 
 const testEmail = 'testimageupload@gmail.com';
 const testPass = 'supersecret';

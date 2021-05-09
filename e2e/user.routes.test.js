@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const app = require('../server');
+const app = require('../src/server');
 const supertest = require('supertest');
-const User = require('../models/User');
-const Image = require('../models/Image');
+const User = require('../src/models/User');
+const Image = require('../src/models/Image');
 
 beforeEach(async () => {
     await User.deleteMany({});
