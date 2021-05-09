@@ -48,7 +48,7 @@ class ImageController {
             const upload_image = {
                 owner: user.email,
                 name: this._extractImageName(file.originalname),
-                isPublic: isPublic.toLowerCase() || false,
+                isPublic: (isPublic !== undefined) ? isPublic.toLowerCase() : false,
                 image: {
                     data: Buffer.from(encoded_image, 'base64'),
                     contentType: file.mimetype

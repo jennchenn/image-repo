@@ -10,6 +10,10 @@ beforeEach(async () => {
     await Image.deleteMany({});
 });
 
+afterAll(async () => {
+    await mongoose.disconnect();
+});
+
 describe('User api', () => {
     it('Check test database is cleared', async () => {
         const imageCount = await Image.countDocuments();
