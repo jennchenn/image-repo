@@ -15,7 +15,6 @@ class UserController {
     async register(email, password) {
         const saltRounds = 10;
         const passwordHash = bcrypt.hashSync(password, saltRounds);
-
         return this.repositoryService.createUser(email, passwordHash);
     }
 

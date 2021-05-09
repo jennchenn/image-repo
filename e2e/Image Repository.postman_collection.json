@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "3382151f-b03c-4041-9502-1c47e2eaac25",
+		"name": "Image Repository",
+		"description": "Endpoints for image repository",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/user/register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"register"
+					]
+				},
+				"description": "Register a user by providing an email and password. The hashed password will be saved to the database."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/user/login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"login"
+					]
+				},
+				"description": "Use the same email and password that was used in registration. If the email and password match, a JWT token will be returned in the response. Create a token variable and save this value to it."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "images",
+							"type": "file",
+							"src": [
+								"/C:/Users/jennc/Downloads/101557179_185352109471129_1944850450322651713_n.jpg",
+								"/C:/Users/jennc/Downloads/smiling-face-with-tear_1f972.png"
+							]
+						},
+						{
+							"key": "isPublic",
+							"value": "false",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/image",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image"
+					]
+				},
+				"description": "Make sure the token returned from the login endpoint is set as the token variable.\r\n\r\nUpload one or multiple image files. Set whether the images should be public/private (isPublic should be true or false). The response will return an array of objects indicating whether the upload succeeded or failed (and if it failed, what the error was)."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/image/user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/image/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image",
+						"user"
+					]
+				},
+				"description": "Make sure the token returned from the login endpoint is set as the token variable.\r\n\r\nRetrieves all images stored by the user and returns them in an array."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/image?name=test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/image?name=test",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"image"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "test"
+						}
+					]
+				},
+				"description": "Make sure the token returned from the login endpoint is set as the token variable.\r\n\r\nSearch for any images with the name specified in the request parameter. Only images that are set as public or that belong to the current user will be returned in the array."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/health",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:8080/health",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"health"
+					]
+				},
+				"description": "Check that the server is up and running"
+			},
+			"response": []
+		}
+	]
+}
