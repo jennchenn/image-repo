@@ -16,6 +16,7 @@ const app = express();
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
+console.log(process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', (err) => {
   console.log(`Error connecting to MongoDB: ${err}`);
@@ -33,8 +34,4 @@ app.get('/image/user', authentication, image.retrieveAllByUser);
 app.post('/user/register', user.register);
 app.post('/user/login', user.login);
 
-// Start server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+module.exports = app;
