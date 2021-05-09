@@ -1,5 +1,5 @@
 # image-repo
-Submission for Shopify backend developer intern challenge.
+Submission for Shopify intern challenge.
 
 ## How to use
 Prerequisites:
@@ -48,6 +48,3 @@ $ npm run test
 - Implementing logging throughout application
 - Adding unit tests and integrated testing with test database that is populated with necessary test data
 - Better documentation throughout the repository
-
-## Final Notes
-Overall this project was a lot of fun to make and taught me a lot!

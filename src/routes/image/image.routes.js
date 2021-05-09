@@ -6,6 +6,7 @@ const imageController = new ImageController();
 exports.upload = async (req, res) => {
     try {
         const user = req.user;
+        console.log('Received request to upload images');
         const result = await imageController.uploadImages(user, req.body.isPublic, req.files);
         res.status(200).send(result);
     } catch (err) {

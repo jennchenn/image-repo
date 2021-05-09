@@ -16,9 +16,11 @@ class ImageController {
                 try {
                     const existingImages = await this.repositoryService.searchImageByUser(user.email, this._extractImageName(file.originalname));
                     if (existingImages.length > 0) {
+                        console.log(`Image already exists with name: ${file.originalname}`);
                         throw new Error('Image already exists');
                     }
                     const result = await this._saveImage(user, isPublic, file);
+                    console.log(`Image saved with name ${result.name}`);
                     const parsedResult = this._parseImageObject(result);
                     return {
                         ...parsedResult,
@@ -69,6 +71,7 @@ class ImageController {
     }
 
     async searchByName(email, name) {
+        console.log(`Searching for image with name: ${name}`);
         const results = await this.repositoryService.searchImageByName(email, name);
         return results.map(this._parseImageObject);
     }
@@ -84,6 +87,7 @@ class ImageController {
     }
 
     async retrieveAllByUser(email) {
+        console.log(`Retrieving all images for user with email: ${email}`);
         const res = await this.repositoryService.retrieveAllByUser(email);
         return res.map(this._parseImageObject);
     }
