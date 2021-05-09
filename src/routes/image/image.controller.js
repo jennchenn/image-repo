@@ -9,6 +9,7 @@ class ImageController {
         this.repositoryService = new Repository();
     }
 
+    // Only allow user to upload images if it doesn't exist already under that user
     async uploadImages(user, isPublic, files) {
         try {
             const results = files.map(async (file) => {
@@ -61,6 +62,7 @@ class ImageController {
         }
     }
 
+    // Images are saved with the original file name
     _extractImageName(filename) {
         const name = path.parse(filename).name;
         return name.replace(/\s/g, "");
@@ -71,6 +73,7 @@ class ImageController {
         return results.map(this._parseImageObject);
     }
 
+    // Modify return object to not return image binary with the result
     _parseImageObject(result) {
         return {
             id: result._id,

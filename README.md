@@ -19,6 +19,7 @@ $ npm install
 PORT=8080
 MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/defaultDatabase?retryWrites=true&w=majority
 JWT_SECRET=somesecret
+NUM_SALT_ROUNDS=10
 ```
 4. Start the server
 ```
@@ -34,6 +35,12 @@ $ npm run start
 - Basic testing of routes
 
 A Postman collection with all available endpoints can be found in the /e2e folder.
+
+## Running tests
+Modify the .env `MONGODB_URI` value to point to a test database. Then run the following command:
+```
+$ npm run test
+```
 
 ## Next Steps
 - Store images elsewhere rather than on the server (perhaps in S3 bucket)

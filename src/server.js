@@ -3,16 +3,17 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const upload = require('./helpers/imageUpload');
 
-dotenv.config({ path: '.env' });
-
 const health = require('./routes/health/health.routes');
 const image = require('./routes/image/image.routes');
 const user = require('./routes/user/user.routes');
+
+dotenv.config({ path: '.env' });
 
 const authentication = require('./middleware/authentication');
 
 const app = express();
 
+// Connect to the database
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
@@ -20,6 +21,9 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', (err) => {
   console.log(`Error connecting to MongoDB: ${err}`);
   process.exit();
+});
+mongoose.connection.on('connected', () => {
+  console.log('Connected to database!');
 });
 
 app.use(express.urlencoded({ extended: true }));

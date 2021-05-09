@@ -1,6 +1,7 @@
 const Image = require('../models/Image');
 const User = require('../models/User');
 
+// Make all queries to database using Repository class
 class Repository {
     createUser(email, passwordHash) {
         const user = {
@@ -20,12 +21,14 @@ class Repository {
         return Image.create(upload_image);
     }
 
+    // Retrieve all public images as well as images owned by the user
     async searchImageByName(email, name) {
         const allImages = await Image.find({ name: name, isPublic: true });
         const userImages = await this.searchImageByUser(email, name, false);
         return userImages.concat(allImages);
     }
 
+    // Retrieve all images from the user
     async searchImageByUser(email, name, isPublic) {
         if (!isPublic) {
             return Image.find({ owner: email, name });

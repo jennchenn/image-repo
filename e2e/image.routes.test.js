@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
 const path = require('path');
-const app = require('../src/server');
 const supertest = require('supertest');
+
+const app = require('../src/server');
 const User = require('../src/models/User');
 const Image = require('../src/models/Image');
 

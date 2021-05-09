@@ -13,11 +13,12 @@ class UserController {
     }
 
     async register(email, password) {
-        const saltRounds = 10;
+        const saltRounds = parseInt(process.env.NUM_SALT_ROUNDS);
         const passwordHash = bcrypt.hashSync(password, saltRounds);
         return this.repositoryService.createUser(email, passwordHash);
     }
 
+    // Compare password with the hash saved to the database
     async matchPassword(user, password) {
         const passwordHash = user.password;
         return bcrypt.compareSync(password, passwordHash);
